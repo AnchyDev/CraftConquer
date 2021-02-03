@@ -1,22 +1,15 @@
 package net.craftconquer.command;
 
-import net.craftconquer.itembuilder.ItemBuilder;
 import net.craftconquer.main.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CommandCraftConquer implements TabExecutor
 {
-    //TODO:
-    //WRITE A COMMAND/SUBCOMMAND HANDLER
-
     private CommandRegistry commandRegistry;
 
     public CommandCraftConquer()
