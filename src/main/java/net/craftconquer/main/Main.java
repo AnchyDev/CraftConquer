@@ -1,5 +1,6 @@
 package net.craftconquer.main;
 
+import lombok.Getter;
 import net.craftconquer.command.CommandCraftConquer;
 import net.craftconquer.command.CommandRegistry;
 import net.craftconquer.command.subcommand.CommandAddItem;
@@ -13,12 +14,16 @@ import java.util.logging.Logger;
 
 public class Main extends JavaPlugin
 {
+    @Getter
     private static Main instance;
 
     private Logger logger;
     private FileConfiguration config;
 
+    @Getter
     private ItemRegistry itemRegistry;
+
+    @Getter
     private CommandRegistry commandRegistry;
 
     @Override
@@ -41,26 +46,11 @@ public class Main extends JavaPlugin
         registerItems();
     }
 
-    public ItemRegistry getItemRegistry()
-    {
-        return itemRegistry;
-    }
-
-    public CommandRegistry getCommandRegistry()
-    {
-        return commandRegistry;
-    }
-
     private void registerItems()
     {
         var item = new Item();
         item.setName("Test Item");
         item.setMaterial(Material.GRASS_BLOCK);
         itemRegistry.register("cc:testitem", item);
-    }
-
-    public static Main getInstance()
-    {
-        return instance;
     }
 }

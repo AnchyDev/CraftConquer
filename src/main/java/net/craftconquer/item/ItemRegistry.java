@@ -1,9 +1,12 @@
 package net.craftconquer.item;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 
 public class ItemRegistry
 {
+    @Getter
     private HashMap<String, Item> registry;
 
     public ItemRegistry()
@@ -20,10 +23,5 @@ public class ItemRegistry
     public Item getItem(String identifier)
     {
         return registry.get(identifier);
-    }
-
-    public HashMap<String, Item> getRegistry()
-    {
-        return registry;
     }
 }
