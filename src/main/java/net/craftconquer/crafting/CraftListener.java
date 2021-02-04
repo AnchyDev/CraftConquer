@@ -88,9 +88,9 @@ public class CraftListener implements Listener
             return;
         }
 
-        var itemRegistery = Main.getInstance().getItemRegistry();
+        var itemRegistry = Main.getInstance().getItemRegistry();
 
-        if(!itemRegistery.isCustomItem(inventory.getResult()))
+        if(!itemRegistry.isCustomItem(inventory.getResult()))
         {
             return;
         }
@@ -99,10 +99,30 @@ public class CraftListener implements Listener
         {
             event.setCancelled(true);
 
-            if(event.getClick() == ClickType.LEFT)
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT)
             {
                 var recipe = getRecipeFromMatrix(inventory.getMatrix());
-                event.getWhoClicked().setItemOnCursor(inventory.getResult());
+
+                if(event.getClick() == ClickType.SHIFT_LEFT)
+                {
+                    if(event.getWhoClicked() instanceof Player)
+                    {
+                        Player player = (Player)event.getWhoClicked();
+
+                        if(player.getInventory().firstEmpty() == -1)
+                        {
+                            player.getWorld().dropItem(player.getLocation(), inventory.getResult());
+                        }
+                        else
+                        {
+                            player.getInventory().addItem(inventory.getResult());
+                        }
+                    }
+                }
+                else if(event.getClick() == ClickType.LEFT)
+                {
+                    event.getWhoClicked().setItemOnCursor(inventory.getResult());
+                }
 
                 for (int i = 0; i < recipe.getRecipeMatrix().length; i++)
                 {
@@ -113,6 +133,7 @@ public class CraftListener implements Listener
                     {
                         continue;
                     }
+
                     if (inventoryItem.getAmount() > 1)
                     {
                         inventoryItem.setAmount(inventoryItem.getAmount() - craftItem.getAmount());
@@ -129,7 +150,7 @@ public class CraftListener implements Listener
                 }
             }
 
-            //Update the inventory to fix bugs regarding item disappears (visual).
+            //Update the inventory to fix bugs regarding item disappearance (visual).
             if(event.getWhoClicked() instanceof Player)
             {
                 Player player = (Player)event.getWhoClicked();
