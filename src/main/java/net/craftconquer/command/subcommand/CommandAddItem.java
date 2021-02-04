@@ -31,6 +31,21 @@ public class CommandAddItem implements SubCommand
             }
 
             String identifier = args[1];
+            int count = 1;
+
+            if (args.length > 2)
+            {
+                try
+                {
+                    count = Integer.parseInt(args[2]);
+                }
+                catch(NumberFormatException e)
+                {
+                    count = 1;
+                    player.sendMessage("Invalid count argument.");
+                    return;
+                }
+            }
 
             var registry = Main.getInstance().getItemRegistry();
             var item = registry.getItem(identifier.toLowerCase());
@@ -43,7 +58,9 @@ public class CommandAddItem implements SubCommand
 
             var inventory = player.getInventory();
 
-            player.getInventory().addItem(new ItemBuilder(item).build());
+            var result = new ItemBuilder(item).build();
+            result.setAmount(count);
+            player.getInventory().addItem(result);
         }
     }
 
