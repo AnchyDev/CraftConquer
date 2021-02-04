@@ -99,7 +99,7 @@ public class CraftListener implements Listener
         {
             event.setCancelled(true);
 
-            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT)
+            if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.RIGHT)
             {
                 var recipe = getRecipeFromMatrix(inventory.getMatrix());
 
@@ -111,7 +111,7 @@ public class CraftListener implements Listener
 
                         if(player.getInventory().firstEmpty() == -1)
                         {
-                            player.getWorld().dropItem(player.getLocation(), inventory.getResult());
+                            return;
                         }
                         else
                         {
@@ -119,7 +119,7 @@ public class CraftListener implements Listener
                         }
                     }
                 }
-                else if(event.getClick() == ClickType.LEFT)
+                else if(event.getClick() == ClickType.LEFT || event.getClick() == ClickType.RIGHT)
                 {
                     event.getWhoClicked().setItemOnCursor(inventory.getResult());
                 }
