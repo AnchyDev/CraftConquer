@@ -3,6 +3,7 @@ package net.craftconquer.crafting;
 import net.craftconquer.itembuilder.ItemBuilder;
 import net.craftconquer.main.Main;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
@@ -16,7 +17,6 @@ public class CraftListener implements Listener
     @EventHandler
     public void onPrepareItemCraftEvent(PrepareItemCraftEvent event)
     {
-        Main.getInstance().getLogger().log(Level.INFO, "onPrepareItemCraftEvent");
         var inventory = event.getInventory();
 
         if(inventory == null || inventory.getMatrix() == null || inventory.getMatrix().length < 1)
@@ -127,6 +127,13 @@ public class CraftListener implements Listener
                 {
                     inventory.setResult(new ItemStack(Material.AIR));
                 }
+            }
+
+            //Update the inventory to fix bugs regarding item disappears (visual).
+            if(event.getWhoClicked() instanceof Player)
+            {
+                Player player = (Player)event.getWhoClicked();
+                player.updateInventory();
             }
         }
     }
