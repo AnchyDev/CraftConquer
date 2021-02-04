@@ -9,6 +9,7 @@ import net.craftconquer.crafting.CraftItem;
 import net.craftconquer.crafting.CraftListener;
 import net.craftconquer.crafting.CraftRecipe;
 import net.craftconquer.item.Item;
+import net.craftconquer.item.ItemQuality;
 import net.craftconquer.item.ItemRegistry;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -63,22 +64,27 @@ public class Main extends JavaPlugin
         var customIngot = new Item();
         customIngot.setName("Black Steel");
         customIngot.setMaterial(Material.NETHERITE_INGOT);
+        customIngot.setQuality(ItemQuality.Uncommon);
 
         var helmet = new Item();
         helmet.setName("Recruit's Helmet");
         helmet.setMaterial(Material.NETHERITE_HELMET);
+        helmet.setQuality(ItemQuality.Uncommon);
 
         var chest = new Item();
         chest.setName("Recruit's Chestplate");
         chest.setMaterial(Material.NETHERITE_CHESTPLATE);
+        chest.setQuality(ItemQuality.Uncommon);
 
         var legs = new Item();
         legs.setName("Recruit's Leggings");
         legs.setMaterial(Material.NETHERITE_LEGGINGS);
+        legs.setQuality(ItemQuality.Uncommon);
 
         var boots = new Item();
         boots.setName("Recruit's Boots");
         boots.setMaterial(Material.NETHERITE_BOOTS);
+        boots.setQuality(ItemQuality.Uncommon);
 
         var helmetRecipe = new CraftRecipe();
         helmetRecipe.setRecipeMatrix(new CraftItem[] {
