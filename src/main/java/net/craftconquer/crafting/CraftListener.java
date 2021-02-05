@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.logging.Level;
 
@@ -45,7 +46,12 @@ public class CraftListener implements Listener
         {
            inventory.setResult(new ItemStack(Material.AIR));
 
-           var craftHandler = Main.getInstance().getCraftHandler();
+           if(inventory.getType() == InventoryType.CRAFTING)
+           {
+               return;
+           }
+
+           var craftHandler = Main.getInstance().getCraftRegistry();
 
            if(craftHandler.getRecipes().size() < 1)
            {
@@ -161,7 +167,7 @@ public class CraftListener implements Listener
 
     private CraftRecipe getRecipeFromMatrix(ItemStack[] matrix)
     {
-        var craftHandler = Main.getInstance().getCraftHandler();
+        var craftHandler = Main.getInstance().getCraftRegistry();
 
         if(craftHandler.getRecipes().size() < 1)
         {
